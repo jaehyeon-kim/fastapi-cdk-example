@@ -10,7 +10,9 @@ STACKS_TO_CREATE = os.getenv("STACKS", "resource").split("|")
 
 app = core.App()
 
-ResourceStack(app, app.node.try_get_context("resource-stack-name"), STACKS_TO_CREATE)
-ApigStack(app, app.node.try_get_context("apig-stack-name"), STACKS_TO_CREATE)
+if "resource" in STACKS_TO_CREATE:
+    ResourceStack(app, app.node.try_get_context("resource-stack-name"))
+if "apig" in STACKS_TO_CREATE:
+    ApigStack(app, app.node.try_get_context("apig-stack-name"))
 
 app.synth()

@@ -6,17 +6,14 @@ from aws_cdk import aws_logs as _logs
 
 
 class ApigStack(core.Stack):
-    def __init__(
-        self, scope: core.Construct, id: str, stacks_to_create: List[str], **kwargs
-    ) -> None:
+    def __init__(self, scope: core.Construct, id: str, **kwargs) -> None:
         super().__init__(scope, id, **kwargs)
         self.resource_bucket_name = self.node.try_get_context("resource-bucket-name")
         self.lambda_package_key = self.node.try_get_context("lambda-package-key")
         self.lambda_function_name = self.node.try_get_context("lambda-function-name")
 
-        if "apig" in stacks_to_create:
-            self.add_lambda_function()
-            self.add_apig()
+        self.add_lambda_function()
+        self.add_apig()
 
     def add_lambda_function(self):
         self.lambda_function = _lambda.Function(
