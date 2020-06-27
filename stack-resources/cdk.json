@@ -1,0 +1,13 @@
+{
+  "app": "python3 app.py",
+  "versionReporting": false,
+  "context": {
+    "apig-stack-name": "fastapi-apig-resources",
+    "resource-stack-name": "fastapi-cdk-resources",
+    "resource-bucket-name": "fastapi-cdk-bucket",
+    "lambda-package-key": "fastapi-cdk-example-lambda-package",
+    "lambda-function-name": "fastapi-cdk-example-lambda-function",
+    "@aws-cdk/core:enableStackNameDuplicates": "true",
+    "aws-cdk:enableDiffNoFail": "true"
+  }
+}
