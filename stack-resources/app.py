@@ -6,7 +6,7 @@ from resources.resource_stack import ResourceStack
 from resources.apig_stack import ApigStack
 
 # stacks to create - eg) resource, apig, resource|apig
-STACKS_TO_CREATE = os.getenv("STACKS", "resource").split("|")
+STACKS_TO_CREATE = os.getenv("STACKS", "resource|apig").split("|")
 
 app = core.App()
 
