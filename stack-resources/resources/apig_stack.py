@@ -20,7 +20,7 @@ class ApigStack(core.Stack):
             self,
             "LambdaFunction",
             runtime=_lambda.Runtime.PYTHON_3_7,
-            handler="lambda_handler.lambda_function",
+            handler="lambda_handler.handler",
             code=_lambda.S3Code(bucket=self.resource_bucket_name, key=self.lambda_package_key),
         )
 
