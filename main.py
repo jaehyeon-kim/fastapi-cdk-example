@@ -1,10 +1,12 @@
 from typing import List, Dict
 from fastapi import FastAPI, HTTPException, Query, Path, Depends
 from fastapi.middleware.cors import CORSMiddleware
+from mangum import Mangum
 
 from src import crud, schema
 
 app = FastAPI(title="FastApi Example Api", version="0.0.1")
+handler = Mangum(app)
 
 # CORS
 app.add_middleware(

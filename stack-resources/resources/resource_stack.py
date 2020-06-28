@@ -1,4 +1,3 @@
-from typing import List
 from aws_cdk import core
 from aws_cdk import aws_s3 as _s3
 

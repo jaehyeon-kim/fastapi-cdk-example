@@ -1,8 +1,8 @@
-from typing import List
 from aws_cdk import core
 from aws_cdk import aws_lambda as _lambda
 from aws_cdk import aws_apigateway as _apig
 from aws_cdk import aws_logs as _logs
+from aws_cdk import aws_s3 as _s3
 
 
 class ApigStack(core.Stack):
@@ -16,12 +16,17 @@ class ApigStack(core.Stack):
         self.add_apig()
 
     def add_lambda_function(self):
+        resource_bucket = _s3.Bucket.from_bucket_name(
+            self, "ResourceBucket", self.resource_bucket_name
+        )
+
         self.lambda_function = _lambda.Function(
             self,
             "LambdaFunction",
             runtime=_lambda.Runtime.PYTHON_3_7,
-            handler="lambda_handler.handler",
-            code=_lambda.S3Code(bucket=self.resource_bucket_name, key=self.lambda_package_key),
+            handler="main.handler",
+            code=_lambda.S3Code(bucket=resource_bucket, key=self.lambda_package_key),
+            function_name="fastapi-cdk-example",
         )
 
         _logs.LogGroup(
@@ -33,8 +38,4 @@ class ApigStack(core.Stack):
         )
 
     def add_apig(self):
-        self.api = _apig.LambdaRestApi(self, "FastApiCdkDemo", handler=self.lambda_function)
-
-        core.CfnOutput(
-            self, "FastApiCdkDemoUrl", value=f"{self.api.url}", description="api gateway url"
-        )
+        _apig.LambdaRestApi(self, "FastApiCdkDemo", handler=self.lambda_function)

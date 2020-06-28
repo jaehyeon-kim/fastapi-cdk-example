@@ -1,3 +1,7 @@
+# pip
+package
+*lambda-package.zip
+
 *.swp
 package-lock.json
 __pycache__
