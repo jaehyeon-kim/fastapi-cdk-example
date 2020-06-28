@@ -1,4 +1,4 @@
-uvicorn app.main:app --host 0.0.0.0 --port 5000 --reload
+uvicorn main:app --host 0.0.0.0 --port 5000 --reload
 
 aws s3 cp fastapi-cdk-example-lambda-package.zip s3://fastapi-cdk-bucket
 
@@ -6,3 +6,7 @@ unzip -vl file-name
 du -h file-name
 
 todo: make lambda package slim
+
+??
+find . -type f -name "*.py[co]" -delete
+find . -type d -name "__pycache__" -delete
